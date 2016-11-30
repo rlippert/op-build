@@ -1,0 +1,91 @@
+From 29a62ef4ff8d5015a63cac5215a94b67503d22f2 Mon Sep 17 00:00:00 2001
+From: Joe McGill <jmcgill@us.ibm.com>
+Date: Tue, 8 Nov 2016 12:35:13 -0600
+Subject: [PATCH] p9.xbus.gX.scom.intifile -- set workarounds for HW393301
+
+  rx_dyn_recal_overall_timeout_sel=15
+  rx_sls_timeout_sel=15
+
+Change-Id: I8d4217b5fb9b8a30144319fc5cbdc22f0c6fcf3a
+Reviewed-on: http://ralgit01.raleigh.ibm.com/gerrit1/32381
+Tested-by: Jenkins Server <pfd-jenkins+hostboot@us.ibm.com>
+Tested-by: Hostboot CI <hostboot-ci+hostboot@us.ibm.com>
+Reviewed-by: Kevin F. Reick <reick@us.ibm.com>
+Reviewed-by: Jenny Huynh <jhuynh@us.ibm.com>
+Reviewed-by: Megan P. Nguyen <pmegan@us.ibm.com>
+Reviewed-by: Thi N. Tran <thi@us.ibm.com>
+Reviewed-by: Joseph J. McGill <jmcgill@us.ibm.com>
+Reviewed-on: http://ralgit01.raleigh.ibm.com/gerrit1/32384
+Reviewed-by: Hostboot Team <hostboot@us.ibm.com>
+Tested-by: FSP CI Jenkins <fsp-CI-jenkins+hostboot@us.ibm.com>
+Reviewed-by: Daniel M. Crowell <dcrowell@us.ibm.com>
+---
+ src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g0_scom.C | 6 +++---
+ src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g1_scom.C | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g0_scom.C b/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g0_scom.C
+index d470a7f..167217f 100644
+--- a/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g0_scom.C
++++ b/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g0_scom.C
+@@ -42,7 +42,7 @@ constexpr auto literal_0b0000000 = 0b0000000;
+ constexpr auto literal_0b0000011 = 0b0000011;
+ constexpr auto literal_0b000000 = 0b000000;
+ constexpr auto literal_0b100111 = 0b100111;
+-constexpr auto literal_0b1010 = 0b1010;
++constexpr auto literal_0b1111 = 0b1111;
+ constexpr auto literal_0b01 = 0b01;
+ constexpr auto literal_0b11 = 0b11;
+ constexpr auto literal_0b0010000 = 0b0010000;
+@@ -6386,7 +6386,7 @@ fapi2::ReturnCode p9_xbus_g0_scom(const fapi2::Target<fapi2::TARGET_TYPE_XBUS>&
+             }
+ 
+             {
+-                l_scom_buffer.insert<uint64_t> (literal_0b1010, 60, 4, 60 );
++                l_scom_buffer.insert<uint64_t> (literal_0b1111, 60, 4, 60 );
+             }
+ 
+             l_rc = fapi2::putScom(TGT0, 0x8008400006010c3full, l_scom_buffer);
+@@ -6566,7 +6566,7 @@ fapi2::ReturnCode p9_xbus_g0_scom(const fapi2::Target<fapi2::TARGET_TYPE_XBUS>&
+             }
+ 
+             {
+-                l_scom_buffer.insert<uint64_t> (literal_0b1011, 48, 4, 60 );
++                l_scom_buffer.insert<uint64_t> (literal_0b1111, 48, 4, 60 );
+             }
+ 
+             l_rc = fapi2::putScom(TGT0, 0x8009a00006010c3full, l_scom_buffer);
+diff --git a/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g1_scom.C b/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g1_scom.C
+index 94b22ba..d7016f9 100644
+--- a/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g1_scom.C
++++ b/src/import/chips/p9/procedures/hwp/initfiles/p9_xbus_g1_scom.C
+@@ -43,7 +43,7 @@ constexpr auto literal_0b0000011 = 0b0000011;
+ constexpr auto literal_0b000000 = 0b000000;
+ constexpr auto literal_0b100111 = 0b100111;
+ constexpr auto literal_0b000001 = 0b000001;
+-constexpr auto literal_0b1010 = 0b1010;
++constexpr auto literal_0b1111 = 0b1111;
+ constexpr auto literal_0b01 = 0b01;
+ constexpr auto literal_0b11 = 0b11;
+ constexpr auto literal_0b0010000 = 0b0010000;
+@@ -6387,7 +6387,7 @@ fapi2::ReturnCode p9_xbus_g1_scom(const fapi2::Target<fapi2::TARGET_TYPE_XBUS>&
+             }
+ 
+             {
+-                l_scom_buffer.insert<uint64_t> (literal_0b1010, 60, 4, 60 );
++                l_scom_buffer.insert<uint64_t> (literal_0b1111, 60, 4, 60 );
+             }
+ 
+             l_rc = fapi2::putScom(TGT0, 0x8008402006010c3full, l_scom_buffer);
+@@ -6567,7 +6567,7 @@ fapi2::ReturnCode p9_xbus_g1_scom(const fapi2::Target<fapi2::TARGET_TYPE_XBUS>&
+             }
+ 
+             {
+-                l_scom_buffer.insert<uint64_t> (literal_0b1011, 48, 4, 60 );
++                l_scom_buffer.insert<uint64_t> (literal_0b1111, 48, 4, 60 );
+             }
+ 
+             l_rc = fapi2::putScom(TGT0, 0x8009a02006010c3full, l_scom_buffer);
+-- 
+1.8.2.2
+

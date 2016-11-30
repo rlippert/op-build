@@ -1,0 +1,37 @@
+From 66ac3ed7928ce28d4014d52eef188fa871497323 Mon Sep 17 00:00:00 2001
+From: Dean Sanner <dsanner@us.ibm.com>
+Date: Wed, 2 Nov 2016 14:42:23 -0500
+Subject: [PATCH 2/2] Actually call p9_fab_iovalid
+
+  -  Without this the SMP won't run
+
+Change-Id: I9d3d8d30125fb4c743df61566efbf8a1e4bf1659
+Reviewed-on: http://ralgit01.raleigh.ibm.com/gerrit1/32141
+Tested-by: Jenkins Server <pfd-jenkins+hostboot@us.ibm.com>
+Tested-by: Jenkins OP Build CI <op-jenkins+hostboot@us.ibm.com>
+Tested-by: FSP CI Jenkins <fsp-CI-jenkins+hostboot@us.ibm.com>
+Reviewed-by: Daniel M. Crowell <dcrowell@us.ibm.com>
+Reviewed-by: Michael Baiocchi <mbaiocch@us.ibm.com>
+Reviewed-by: Matthew A. Ploetz <maploetz@us.ibm.com>
+---
+ src/usr/isteps/istep09/call_proc_fab_iovalid.C | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/usr/isteps/istep09/call_proc_fab_iovalid.C b/src/usr/isteps/istep09/call_proc_fab_iovalid.C
+index fa32230..39676e5 100644
+--- a/src/usr/isteps/istep09/call_proc_fab_iovalid.C
++++ b/src/usr/isteps/istep09/call_proc_fab_iovalid.C
+@@ -98,8 +98,8 @@ void*    call_proc_fab_iovalid( void    *io_pArgs )
+         TRACFCOMP( ISTEPS_TRACE::g_trac_isteps_trace,
+                  "Running p9_fab_iovalid HWP on processor target %.8X",
+                  TARGETING::get_huid(l_cpu_target) );
+-// @TODO RTC:134079 Integrate L2 HWPs for istep 9
+-//         FAPI_INVOKE_HWP(l_errl, p9_fab_iovalid, l_fapi2_proc_target, true);
++        FAPI_INVOKE_HWP(l_errl, p9_fab_iovalid, l_fapi2_proc_target,
++                        true, true, false);
+         if(l_errl)
+         {
+             TRACFCOMP( ISTEPS_TRACE::g_trac_isteps_trace,
+-- 
+1.8.2.2
+

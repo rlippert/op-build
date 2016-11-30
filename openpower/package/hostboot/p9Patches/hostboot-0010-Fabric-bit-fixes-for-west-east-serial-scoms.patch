@@ -1,0 +1,72 @@
+From 18b51888e8a7dc000c79543bee3a8bf5bb37bca1 Mon Sep 17 00:00:00 2001
+From: Jenny Huynh <jhuynh@us.ibm.com>
+Date: Thu, 3 Nov 2016 16:18:05 -0500
+Subject: [PATCH 1/2] Fabric bit fixes for west/east serial scoms
+
+Change-Id: I76d90450bd1795b6da10ec1c47016eb11df5e182
+Reviewed-on: http://ralgit01.raleigh.ibm.com/gerrit1/32205
+Tested-by: Hostboot CI <hostboot-ci+hostboot@us.ibm.com>
+Reviewed-by: DANIEL C. HOWE <dchowe@us.ibm.com>
+Tested-by: Jenkins Server <pfd-jenkins+hostboot@us.ibm.com>
+Reviewed-by: Joseph J. McGill <jmcgill@us.ibm.com>
+Reviewed-on: http://ralgit01.raleigh.ibm.com/gerrit1/32207
+Reviewed-by: Hostboot Team <hostboot@us.ibm.com>
+Tested-by: Jenkins OP Build CI <op-jenkins+hostboot@us.ibm.com>
+Tested-by: FSP CI Jenkins <fsp-CI-jenkins+hostboot@us.ibm.com>
+Reviewed-by: Daniel M. Crowell <dcrowell@us.ibm.com>
+---
+ .../p9/procedures/hwp/initfiles/p9_fbc_cd_hp_scom.C     | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
+
+diff --git a/src/import/chips/p9/procedures/hwp/initfiles/p9_fbc_cd_hp_scom.C b/src/import/chips/p9/procedures/hwp/initfiles/p9_fbc_cd_hp_scom.C
+index c0e27b9..ca80072 100644
+--- a/src/import/chips/p9/procedures/hwp/initfiles/p9_fbc_cd_hp_scom.C
++++ b/src/import/chips/p9/procedures/hwp/initfiles/p9_fbc_cd_hp_scom.C
+@@ -197,7 +197,7 @@ fapi2::ReturnCode p9_fbc_cd_hp_scom(const fapi2::Target<fapi2::TARGET_TYPE_PROC_
+ 
+                 if ((l_def_TRUE == literal_1))
+                 {
+-                    l_scom_buffer.insert<uint64_t> (literal_0b0, 29, 2, 62 );
++                    l_scom_buffer.insert<uint64_t> (literal_0b00, 29, 2, 62 );
+                 }
+ 
+                 if ((l_def_TRUE == literal_1))
+@@ -294,25 +294,30 @@ fapi2::ReturnCode p9_fbc_cd_hp_scom(const fapi2::Target<fapi2::TARGET_TYPE_PROC_
+ 
+                 if ((l_def_SAFE_MODE == literal_1))
+                 {
+-                    l_scom_buffer.insert<uint64_t> (literal_0b00, 49, 2, 62 );
++                    l_scom_buffer.insert<uint64_t> (literal_0b0, 49, 1, 63 );
+                 }
+                 else if ((l_def_TRUE == literal_1))
+                 {
+-                    l_scom_buffer.insert<uint64_t> (literal_0b11, 49, 2, 62 );
++                    l_scom_buffer.insert<uint64_t> (literal_0b1, 49, 1, 63 );
+                 }
+ 
+                 if ((l_def_TRUE == literal_1))
+                 {
+-                    l_scom_buffer.insert<uint64_t> (literal_0b0, 51, 1, 63 );
++                    l_scom_buffer.insert<uint64_t> (literal_0b0, 50, 1, 63 );
+                 }
+ 
+                 if ((l_def_SAFE_MODE == literal_1))
+                 {
+-                    l_scom_buffer.insert<uint64_t> (literal_0b00, 52, 2, 62 );
++                    l_scom_buffer.insert<uint64_t> (literal_0b00, 51, 2, 62 );
+                 }
+                 else if ((l_def_TRUE == literal_1))
+                 {
+-                    l_scom_buffer.insert<uint64_t> (literal_0b01, 52, 2, 62 );
++                    l_scom_buffer.insert<uint64_t> (literal_0b01, 51, 2, 62 );
++                }
++
++                if ((l_def_TRUE == literal_1))
++                {
++                    l_scom_buffer.insert<uint64_t> (literal_0b0, 53, 1, 63 );
+                 }
+ 
+                 if ((l_def_TRUE == literal_1))
+-- 
+1.8.2.2
+
