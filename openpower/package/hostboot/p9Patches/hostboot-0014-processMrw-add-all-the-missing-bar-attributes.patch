@@ -1,0 +1,56 @@
+From 525d43490208016e52f5b4aca820ed4c6893cea5 Mon Sep 17 00:00:00 2001
+From: Prachi Gupta <pragupta@us.ibm.com>
+Date: Wed, 30 Nov 2016 18:38:23 -0600
+Subject: [PATCH] processMrw: add all the missing bar attributes
+
+Change-Id: I5d1bffd7a9f37e3061b001e4fd38ee185fda3ebf
+---
+ src/usr/targeting/common/processMrw.pl | 32 ++++++++++++++++++++++----------
+ 1 file changed, 22 insertions(+), 10 deletions(-)
+
+diff --git a/src/usr/targeting/common/processMrw.pl b/src/usr/targeting/common/processMrw.pl
+index 4adef28..f03187b 100644
+--- a/src/usr/targeting/common/processMrw.pl
++++ b/src/usr/targeting/common/processMrw.pl
+@@ -631,16 +631,28 @@ sub setupBars
+     my $proc   = $targetObj->getAttribute($target, "FABRIC_CHIP_ID");
+     $targetObj->{TOPOLOGY}->{$group}->{$proc}++;
+ 
+-    my @bars=("FSP_BASE_ADDR","PSI_BRIDGE_BASE_ADDR",
+-              "INTP_BASE_ADDR","PHB_MMIO_ADDRS_64","PHB_MMIO_ADDRS_32",
+-              "PHB_XIVE_ESB_ADDRS","PHB_REG_ADDRS","XIVE_ROUTING_ESB_ADDR",
+-              "XIVE_ROUTING_END_ADDR","XIVE_PRESENTATION_NVT_ADDR",
+-              "VAS_HYPERVISOR_WINDOW_CONTEXT_ADDR",
+-              "VAS_USER_WINDOW_CONTEXT_ADDR","LPC_BUS_ADDR",
+-              "NVIDIA_NPU_PRIVILEGED_ADDR","NVIDIA_NPU_USER_REG_ADDR",
+-              "NVIDIA_PHY0_REG_ADDR","NVIDIA_PHY1_REG_ADDR",
+-              "XIVE_CONTROLLER_BAR_ADDR","XIVE_PRESENTATION_BAR_ADDR",
+-              "NX_RNG_ADDR");
++    my @bars=(  "FSP_BASE_ADDR", #
++                "PSI_BRIDGE_BASE_ADDR", #
++                "INTP_BASE_ADDR",
++                "PHB_MMIO_ADDRS_64", #
++                "PHB_MMIO_ADDRS_32", #
++                "PHB_XIVE_ESB_ADDRS", #
++                "PHB_REG_ADDRS", #
++                "XIVE_ROUTING_ESB_ADDR", #
++                "XIVE_ROUTING_END_ADDR", #
++                "XIVE_PRESENTATION_NVT_ADDR", #
++                "VAS_HYPERVISOR_WINDOW_CONTEXT_ADDR", #
++                "VAS_USER_WINDOW_CONTEXT_ADDR", #
++                "LPC_BUS_ADDR", #
++                "NVIDIA_NPU_PRIVILEGED_ADDR", #
++                "NVIDIA_NPU_USER_REG_ADDR", #
++                "NVIDIA_PHY0_REG_ADDR", #
++                "NVIDIA_PHY1_REG_ADDR", #
++                "PSI_HB_ESB_ADDR", #
++                "XIVE_CONTROLLER_BAR_ADDR", #
++                "XIVE_PRESENTATION_BAR_ADDR", #
++                "XSCOM_BASE_ADDRESS", #
++                "NX_RNG_ADDR"); #
+ 
+     # Attribute only valid in naples-based systems
+     if (!$targetObj->isBadAttribute($target,"NPU_MMIO_BAR_BASE_ADDR") ) {
+-- 
+1.8.2.2
+
