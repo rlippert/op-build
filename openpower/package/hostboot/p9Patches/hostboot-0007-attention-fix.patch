@@ -1,0 +1,33 @@
+From d10cca8bc67343ae170f2eb215d58b4c5ed09793 Mon Sep 17 00:00:00 2001
+From: Prachi Gupta <pragupta@us.ibm.com>
+Date: Thu, 17 Nov 2016 11:59:10 -0600
+Subject: [PATCH] Dean's attention fix
+
+Change-Id: I4d4b718c35b309cb3d0f6847ca2f2a50efc75ba0
+---
+ src/usr/initservice/istepdispatcher/istepdispatcher.C | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/usr/initservice/istepdispatcher/istepdispatcher.C b/src/usr/initservice/istepdispatcher/istepdispatcher.C
+index a963b58..adfc851 100644
+--- a/src/usr/initservice/istepdispatcher/istepdispatcher.C
++++ b/src/usr/initservice/istepdispatcher/istepdispatcher.C
+@@ -758,6 +758,7 @@ errlHndl_t IStepDispatcher::doIstep(uint32_t i_istep,
+         else if ((true == theStep->taskflags.check_attn) &&
+                  (false == iv_mpiplMode))
+         {
++#if 0
+             TRACDCOMP(g_trac_initsvc,
+                       INFO_MRK"Check for attentions and invoke PRD" );
+ 
+@@ -768,6 +769,7 @@ errlHndl_t IStepDispatcher::doIstep(uint32_t i_istep,
+                 TRACFCOMP( g_trac_initsvc, ERR_MRK"doIstep: error from "
+                           "checkForIplAttentions");
+             }
++#endif
+         }
+ 
+ #ifdef CONFIG_RECONFIG_LOOP_TESTS_ENABLE
+-- 
+1.8.2.2
+
